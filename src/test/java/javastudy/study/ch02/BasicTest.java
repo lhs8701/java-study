@@ -74,11 +74,10 @@ class BasicTest {
     @DisplayName("문자열 리스트 내의 원소를 숫자로 변환한다. ")
     void test5() {
         // given
-        ListUtils listUtils = new ListUtils();
         List<String> stringList = List.of("1", "2", "3");
-
+        ArrayUtils arrayUtils = new ArrayUtils();
         // when
-        int[] integerArray = listUtils.convertToIntegerList(stringList);
+        int[] integerArray = arrayUtils.from(stringList);
 
         // then
         assertThat(integerArray).containsExactly(1, 2, 3);

@@ -5,10 +5,12 @@ import java.util.List;
 
 public class ArrayUtils {
 
-    public static int[] from(List<String> stringList) {
-        return stringList.stream()
+    public int[] from(List<String> stringList) {
+        int[] intArray = stringList.stream()
                 .mapToInt(Integer::parseInt)
                 .toArray();
+        validatePositive(intArray);
+        return intArray;
     }
     public void validatePositive(int[] integerList) {
         boolean allPositive = Arrays.stream(integerList)
