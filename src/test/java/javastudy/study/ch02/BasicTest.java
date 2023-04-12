@@ -4,13 +4,10 @@ package javastudy.study.ch02;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class BasicTest {
@@ -79,23 +76,23 @@ class BasicTest {
         List<String> stringList = List.of("1", "2", "3");
 
         // when
-        List<Integer> integerList = listUtils.convertToIntegerList(stringList);
+        int[] integerArray = listUtils.convertToIntegerList(stringList);
 
         // then
-        assertThat(integerList).containsExactly(1, 2, 3);
+        assertThat(integerArray).containsExactly(1, 2, 3);
     }
 
     @Test
-    @DisplayName("리스트 내의 숫자가 음수이면 예외가 발생한다. ")
+    @DisplayName("배열 내의 숫자가 음수이면 예외가 발생한다. ")
     void test6() {
         // given
-        List<Integer> integerList = List.of(1, -2, 3);
-        ListUtils listUtils = new ListUtils();
+        int[] integerArray = new int[]{1, -2, 3};
+        ArrayUtils arrayUtils = new ArrayUtils();
         // when
 
         // then
         assertThatThrownBy(() -> {
-            listUtils.validatePositive(integerList);
+            arrayUtils.validatePositive(integerArray);
         }).isInstanceOf(RuntimeException.class);
     }
 }
