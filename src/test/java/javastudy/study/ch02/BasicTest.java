@@ -4,6 +4,10 @@ package javastudy.study.ch02;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -48,5 +52,20 @@ class BasicTest {
 
         // then
         assertThat(result).isEqualTo(";");
+    }
+
+    @Test
+    @DisplayName("문자열을 구분자로 분리한 서브 리스트를 반환한다. ")
+    void test4() {
+        // given
+        String str = "1,2:3";
+        String token = ",:";
+        CustomStringTokenizer customStringTokenizer = new CustomStringTokenizer();
+
+        // when
+        List<String> result = customStringTokenizer.split(str, token);
+
+        // then
+        assertThat(result).containsExactly("1", "2", "3");
     }
 }
