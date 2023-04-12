@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
+import static org.assertj.core.api.Assertions.*;
 
 
 class BasicTest {
@@ -71,6 +70,7 @@ class BasicTest {
         // then
         assertThat(result).containsExactly("1", "2", "3");
     }
+
     @Test
     @DisplayName("문자열 리스트 내의 원소를 숫자로 변환한다. ")
     void test5() {
@@ -83,5 +83,19 @@ class BasicTest {
 
         // then
         assertThat(integerList).containsExactly(1, 2, 3);
+    }
+
+    @Test
+    @DisplayName("리스트 내의 숫자가 음수이면 예외가 발생한다. ")
+    void test6() {
+        // given
+        List<Integer> integerList = List.of(1, -2, 3);
+        ListUtils listUtils = new ListUtils();
+        // when
+
+        // then
+        assertThatThrownBy(() -> {
+            listUtils.validatePositive(integerList);
+        }).isInstanceOf(RuntimeException.class);
     }
 }
