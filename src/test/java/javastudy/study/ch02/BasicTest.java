@@ -3,11 +3,13 @@ package javastudy.study.ch02;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class BasicTest {
@@ -43,7 +45,7 @@ class BasicTest {
     @DisplayName("//와 \n 사이의 문자를 인식한다.")
     void test3() {
         // given
-        String str = "//;\n1;2;3";
+        String str = "//;\\n1;2;3";
         DelimiterVerifier delimiterVerifier = new DelimiterVerifier();
 
         // when
@@ -109,5 +111,19 @@ class BasicTest {
 
         // then
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest()
+    @CsvSource(value = {"1,2,3.,:", "//;\\n1;2;3.;"}, delimiter = '.')
+    @DisplayName("첫번째 문자가 숫자면, ,;를 토큰으로 하고, 그렇지 않으면 커스텀 구분자를 토큰으로 한다.")
+    void test8(String str, String expected) {
+        // given
+        TokenDecider tokenDecider = new TokenDecider();
+
+        // when
+        String result = tokenDecider.produceToken(str);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 }
