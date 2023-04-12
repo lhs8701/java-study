@@ -4,9 +4,13 @@ package javastudy.study.ch02;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -41,33 +45,39 @@ class BasicTest {
         assertThat(result).isFalse();
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"//;\\n1;2;3.//;\\n", "//a\\n1;2;3.//a\\n"}, delimiter = '.')
     @DisplayName("//와 \n 사이의 문자를 인식한다.")
-    void test3() {
+    void test3(String str, String expected) {
         // given
-        String str = "//;\\n1;2;3";
         DelimiterVerifier delimiterVerifier = new DelimiterVerifier();
 
         // when
         String result = delimiterVerifier.verifyToken(str);
 
         // then
-        assertThat(result).isEqualTo(";");
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
+    private static Stream<Arguments> generateData() {
+        return Stream.of(
+                Arguments.of("1,2:3", ",:", List.of("1", "2", "3")),
+                Arguments.of("//;\\n1;2;3", "//;\\n", List.of("1", "2", "3"))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateData")
     @DisplayName("문자열을 구분자로 분리한 서브 리스트를 반환한다. ")
-    void test4() {
+    void test4(String str, String token, List<String> expected) {
         // given
-        String str = "1,2:3";
-        String token = ",:";
         CustomStringTokenizer customStringTokenizer = new CustomStringTokenizer();
 
         // when
         List<String> result = customStringTokenizer.split(str, token);
 
         // then
-        assertThat(result).containsExactly("1", "2", "3");
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -113,7 +123,7 @@ class BasicTest {
     }
 
     @ParameterizedTest()
-    @CsvSource(value = {"1,2,3.,:", "//;\\n1;2;3.;"}, delimiter = '.')
+    @CsvSource(value = {"1,2,3.,:", "//;\\n1;2;3.//;\\n"}, delimiter = '.')
     @DisplayName("첫번째 문자가 숫자면, ,;를 토큰으로 하고, 그렇지 않으면 커스텀 구분자를 토큰으로 한다.")
     void test8(String str, String expected) {
         // given
