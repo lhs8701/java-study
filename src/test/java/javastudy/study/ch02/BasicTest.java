@@ -16,7 +16,7 @@ class BasicTest {
         String str = "1,2,3";
 
         // when
-        boolean result = numberChecker.func(str);
+        boolean result = numberChecker.checkFirstChar(str);
 
         // then
         assertThat(result).isTrue();
@@ -30,9 +30,23 @@ class BasicTest {
         String str = "//;\n1;2;3";
 
         // when
-        boolean result = numberChecker.func(str);
+        boolean result = numberChecker.checkFirstChar(str);
 
         // then
         assertThat(result).isFalse();
+    }
+
+    @Test
+    @DisplayName("//와 \n 사이의 문자를 인식한다.")
+    void test3() {
+        // given
+        String str = "//;\n1;2;3";
+        DelimiterVerifier delimiterVerifier = new DelimiterVerifier();
+
+        // when
+        String result = delimiterVerifier.verifyToken(str);
+
+        // then
+        assertThat(result).isEqualTo(";");
     }
 }
