@@ -4,10 +4,10 @@ package javastudy.study.ch02;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 
 class BasicTest {
@@ -94,5 +94,20 @@ class BasicTest {
         assertThatThrownBy(() -> {
             arrayUtils.validatePositive(integerArray);
         }).isInstanceOf(RuntimeException.class);
+    }
+
+
+    @Test
+    @DisplayName("배열의 모든 수를 더한다.")
+    void test7() {
+        // given
+        int[] integerArray = new int[]{1, 2, 3};
+        ArrayUtils arrayUtils = new ArrayUtils();
+
+        // when
+        int result = arrayUtils.sum(integerArray);
+
+        // then
+        assertThat(result).isEqualTo(6);
     }
 }

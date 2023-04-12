@@ -11,4 +11,9 @@ public class ArrayUtils {
             throw new RuntimeException();
         }
     }
+
+    public int sum(int[] integerArray){
+        return Arrays.stream(integerArray)
+                .sum();
+    }
 }
