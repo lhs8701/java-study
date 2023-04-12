@@ -5,10 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 
 class BasicTest {
@@ -67,5 +70,18 @@ class BasicTest {
 
         // then
         assertThat(result).containsExactly("1", "2", "3");
+    }
+    @Test
+    @DisplayName("문자열 리스트 내의 원소를 숫자로 변환한다. ")
+    void test5() {
+        // given
+        ListUtils listUtils = new ListUtils();
+        List<String> stringList = List.of("1", "2", "3");
+
+        // when
+        List<Integer> integerList = listUtils.convertToIntegerList(stringList);
+
+        // then
+        assertThat(integerList).containsExactly(1, 2, 3);
     }
 }
