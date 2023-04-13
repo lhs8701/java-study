@@ -1,13 +1,12 @@
-package javastudy.study.ch02.calculator;
-
-import javastudy.study.ch02.ArrayUtils;
-import javastudy.study.ch02.CustomStringTokenizer;
-import javastudy.study.ch02.TokenDecider;
+package javastudy.study.ch02.calculator.v1;
 
 import java.util.List;
 
 public class StringCalculator {
     public int add(String text){
+        if (text == null || text.isEmpty()){
+            return 0;
+        }
         TokenDecider tokenDecider = new TokenDecider();
         String token = tokenDecider.produceToken(text);
         CustomStringTokenizer customStringTokenizer = new CustomStringTokenizer();

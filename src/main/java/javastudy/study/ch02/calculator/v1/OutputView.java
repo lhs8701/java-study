@@ -1,4 +1,4 @@
-package javastudy.study.ch02;
+package javastudy.study.ch02.calculator.v1;
 
 public class OutputView {
 

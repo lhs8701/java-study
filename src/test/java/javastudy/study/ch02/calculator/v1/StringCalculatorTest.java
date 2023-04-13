@@ -1,4 +1,4 @@
-package javastudy.study.ch02;
+package javastudy.study.ch02.calculator.v1;
 
 
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-class BasicTest {
+class StringCalculatorTest {
     @Test
     @DisplayName("첫 문자가 숫자이면 True를 리턴한다.")
     void test1() {
