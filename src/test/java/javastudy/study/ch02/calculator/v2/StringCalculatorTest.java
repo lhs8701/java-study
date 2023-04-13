@@ -53,4 +53,16 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자가 포함된 문자열 수식의 합을 구한다.")
+    void tes5() {
+        // given
+        String text = "//;\n1;2;3";
+        // when
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.add(text);
+        // then
+        assertThat(result).isEqualTo(6);
+    }
 }
