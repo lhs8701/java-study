@@ -17,4 +17,16 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("피연산자가 하나인 경우 그 피연산자를 출력한다.")
+    void test2() {
+        // given
+        String text = "1";
+        // when
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.add(text);
+        // then
+        assertThat(result).isEqualTo(1);
+    }
 }
