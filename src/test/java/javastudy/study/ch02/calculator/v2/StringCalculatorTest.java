@@ -29,4 +29,16 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("쉼표를 구분자로 두 피연산자가 주어진 경우 두 수의 합을 출력한다.")
+    void tes3() {
+        // given
+        String text = "1,2";
+        // when
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.add(text);
+        // then
+        assertThat(result).isEqualTo(3);
+    }
 }
