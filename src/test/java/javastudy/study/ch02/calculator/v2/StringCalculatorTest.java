@@ -41,4 +41,16 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("구분자가 두 개 이상일 때, 세 수의 합을 출력한다.")
+    void tes4() {
+        // given
+        String text = "1,2:3";
+        // when
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.add(text);
+        // then
+        assertThat(result).isEqualTo(6);
+    }
 }

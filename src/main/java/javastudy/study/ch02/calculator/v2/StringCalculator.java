@@ -7,7 +7,7 @@ public class StringCalculator {
         if (text.isEmpty()) {
             return 0;
         }
-        String[] token = text.split(",");
+        String[] token = text.split(",|:");
         return Arrays.stream(token)
                 .mapToInt(Integer::parseInt)
                 .sum();
